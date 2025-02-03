@@ -7,7 +7,7 @@ y0 = transition_start(2);
 
 z0 = transition_start(3);
 
-ramp_angle = 40; % degrees
+ramp_angle = 45; % degrees
 ramp_angle_rads = ramp_angle*(pi/180);
 
 fidelity = 1000; % points
@@ -18,7 +18,7 @@ s = linspace(0,total_section_length,fidelity);
 
 [x, y, z] = drop_path(s, ramp_angle_rads, x0, y0, z0, pos_y);
 
-plot3(x,y,z);
+plot3(x,y,z, 'LineWidth', 2);
 
 function [x,y,z] = drop_path(s, ramp_angle, x0, y0, z0, pos_y)
 

@@ -1,12 +1,33 @@
-%% Here we are using cubic geometry to create smooth transitions between sections
+%% Here we are using circular arc geometry to create smooth transitions between sections
 
-transition_length = 5; %meters
+y0 = transition_start(2); % Start y-position
+z0 = transition_start(3); % Start height
+zf = transition_start(3) - 5; % End height (fixed at banked turn)
 
-fidelity = 100;
-
-x_trans = linspace(transition_start(1), banked_turn_origin(1), 100);
-y_trans = linspace(transition_start(2), banked_turn_origin(2), 100);
-z_trans = transition_start(3) - drop_length + (banked_turn_origin(3) - (transition_start(3) - drop_length)) * (3*t.^2 - 2*t.^3); 
+% Hardcoded values
 
 
+if pos_y
+    yf = y0 + 2 * (z0 - zf); % Compute y_f
+else 
+    yf = y0 + 2 * (z0 - zf)*-1; % Compute y_f if y direction is neg
+end
 
+
+if concavity
+    b = -1;
+    a = 1 / (4 * (z0 - zf));
+else
+    b = 0;
+    a = -1 / (4 * (z0 - zf));
+end
+
+c = z0;
+
+% Generate transition path
+y_vals = linspace(y0, yf, 100);
+z_vals = a * (y_vals - y0).^2 + b * (y_vals - y0) + c;
+x_vals = ones(size(y_vals)) * transition_start(1); % Keep x constant
+
+% Plot the transition section
+plot3(x_vals, y_vals, z_vals, 'LineWidth', 2);

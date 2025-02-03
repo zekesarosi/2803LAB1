@@ -18,7 +18,7 @@ s = linspace(0,total_banked_turn_length,fidelity); % array of discrete track len
 
 [x, y, z] = banked_turn_path(s, radius, banked_turn_origin(1), banked_turn_origin(2), banked_turn_origin(3));
 
-plot3(x,y,z)
+plot3(x,y,z, 'LineWidth', 2);
 
 
 function [x, y, z] = banked_turn_path(s, radius, x0, y0, z0)
