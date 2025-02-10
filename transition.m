@@ -15,10 +15,8 @@ end
 
 
 if concavity
-    b = -1;
     a = 1 / (4 * (z0 - zf));
 else
-    b = 0;
     a = -1 / (4 * (z0 - zf));
 end
 

@@ -17,7 +17,7 @@ s = linspace(0,total_banked_turn_length,fidelity); % array of discrete track len
 
 [x, y, z] = banked_turn_path(s, radius, banked_turn_origin(1), banked_turn_origin(2), banked_turn_origin(3));
 
-v = sqrt(2*parameters.g*cart.speed)*ones(1, length(s));
+v = cart.speed*ones(1, length(s));
 scatter3(x, y, z, 20, v, 'filled'); % 20 is marker size
 
 

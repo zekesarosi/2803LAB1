@@ -27,6 +27,7 @@ v = sqrt(2 * parameters.g * h);
 % Create scatter plot with color proportional to velocity
 scatter3(x, y, z, 20, v, 'filled'); % 50 is marker size
 
+cart.speeed = v(fidelity);
 
 function [x,y,z] = drop_path(s, ramp_angle, x0, y0, z0, pos_y)
 

@@ -40,6 +40,7 @@ final_v = sqrt(2*parameters.g*parameters.initial_h);
 pos_y = true;
 transition_start = parameters.orgin;
 drop_length = 25;
+
 drop;
 
 
@@ -47,7 +48,8 @@ drop;
 %% Transition 1:
 
 transition_length = 5; % meters
-concavity = true; % concave up
+concavity = true;
+b = -1;
 transition_start = [x(parameters.trans_fid), y(parameters.trans_fid), z(parameters.trans_fid)];
 transition;
 
@@ -63,16 +65,14 @@ banked_turn;
 %% Transition 2:
 transition_length = 5; % meters
 concavity = false; % concave down
+b = 0;
 pos_y = false;
 
 cart.speed = sqrt(2*parameters.g*(parameters.initial_h - z(parameters.feature_fid)))
 
 transition_start = [x(parameters.feature_fid), y(parameters.feature_fid), z(parameters.feature_fid)];
 
-
 transition;
-
-
 
 
 %% Track Section 3:
@@ -82,10 +82,25 @@ transition_start = [x_vals(parameters.trans_fid),y_vals(parameters.trans_fid),z_
 drop_length = 25;
 drop;
 
+
+
+%% Transition 3:
+transition_length = 5; % meters
+concavity = true; % concave down
+pos_y = false;
+b = 1;
+cart.speed = sqrt(2*parameters.g*(parameters.initial_h - z(parameters.trans_fid)))
+
+transition_start = [x(parameters.trans_fid), y(parameters.trans_fid), z(parameters.trans_fid)];
+
+transition;
+
+
+
+
+
 clim([0, final_v]);
 colormap jet; % Choose a colormap
 colorbar; % Display color bar
 
 hold off;
-
-
