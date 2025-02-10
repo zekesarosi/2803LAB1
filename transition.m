@@ -25,9 +25,11 @@ end
 c = z0;
 
 % Generate transition path
-y_vals = linspace(y0, yf, 100);
+y_vals = linspace(y0, yf, parameters.trans_fid);
 z_vals = a * (y_vals - y0).^2 + b * (y_vals - y0) + c;
 x_vals = ones(size(y_vals)) * transition_start(1); % Keep x constant
 
+v = sqrt(2*parameters.g.*(parameters.initial_h - z_vals));
+
 % Plot the transition section
-plot3(x_vals, y_vals, z_vals, 'LineWidth', 2);
+scatter3(x_vals, y_vals, z_vals, 20, v, 'filled');
