@@ -6,7 +6,7 @@ y0 = transition_start(2);
 z0 = transition_start(3);
 v0 = sqrt(2 * g * (h_0 - z0));
 launch_angle = pi/8;
-yf = z0;
+yf = -z0;
 
 y = linspace(y0, yf, FIDELITY);
 delta_y = (yf - y0) / FIDELITY;
@@ -17,7 +17,7 @@ b = tan(launch_angle);
 c = z0;
 
 Gs = calculateParabolaGs(a, b, c, y, y0, h_0);
-z = a * y.^2 + b * y + c;
+z = a * (y - y0) .^2 + b * (y - y0) + c;
 s = zeros(1, FIDELITY);
 for i=2:FIDELITY
     s(i) = calculateParabolaDistance(a, b, c, y(i), delta_y, s(i - 1));
