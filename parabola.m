@@ -5,8 +5,8 @@ x0 = transition_start(1);
 y0 = transition_start(2);
 z0 = transition_start(3);
 v0 = sqrt(2 * g * (h_0 - z0));
-launch_angle = ;
-yf = ;
+launch_angle = pi/8;
+yf = z0;
 
 y = linspace(y0, yf, FIDELITY);
 delta_y = (yf - y0) / FIDELITY;
@@ -22,9 +22,9 @@ s = zeros(1, FIDELITY);
 for i=2:FIDELITY
     s(i) = calculateParabolaDistance(a, b, c, y(i), delta_y, s(i - 1));
 end
+v = sqrt(2 * g * (h_0 - z));
 
-figure();
-scatter3(x0 * ones(1, FIDELITY), y, z, 20, Gs, 'filled');
+scatter3(x0 * ones(1, FIDELITY), y, z, 20, v, 'filled');
 xlabel("x");
 ylabel("y");
 zlabel("z");

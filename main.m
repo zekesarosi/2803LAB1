@@ -89,12 +89,16 @@ transition_length = 5; % meters
 concavity = true; % concave down
 pos_y = false;
 b = 1;
-cart.speed = sqrt(2*parameters.g*(parameters.initial_h - z(parameters.trans_fid)))
+cart.speed = sqrt(2*parameters.g*(parameters.initial_h - z(parameters.trans_fid)));
 
 transition_start = [x(parameters.trans_fid), y(parameters.trans_fid), z(parameters.trans_fid)];
 
 transition;
 
+%% Parabola:
+
+transition_start = [x_vals(parameters.trans_fid),y_vals(parameters.trans_fid),z_vals(parameters.trans_fid)];
+parabola;
 
 
 
