@@ -30,8 +30,8 @@ figure;
 subplot(3,1,1);
 plot(s, G_normal, 'r', 'LineWidth', 2);
 xlabel('Path Length (s) [m]');
-ylabel('Normal G');
-title('Normal G-Force Along Braking Section');
+ylabel('Up / Down G');
+title('Up / Down G-Force Along Braking Section');
 grid on;
 
 % Lateral G-Force Plot
@@ -46,8 +46,8 @@ grid on;
 subplot(3,1,3);
 plot(s, G_updown, 'g', 'LineWidth', 2);
 xlabel('Path Length (s) [m]');
-ylabel('Up/Down G');
-title('Up/Down G-Force Along Braking Section');
+ylabel('Forward / Backwards G');
+title('Forward / Backwards G-Force Along Braking Section');
 grid on;
 
 % Overall title for figure

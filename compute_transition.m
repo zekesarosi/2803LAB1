@@ -89,8 +89,8 @@ function [x_vals, y_vals, z_vals, s_vals] = compute_transition(pos_y, concavity,
     subplot(3,1,1);
     plot(s_vals, G_normal, 'r', 'LineWidth', 2);
     xlabel('Path Length (s) [m]');
-    ylabel('Normal G');
-    title('Normal G-Force Along Transition');
+    ylabel('Up / Down G');
+    title('Up / Down G-Force Along Transition');
     grid on;
     
     % Lateral G-Force Plot
@@ -105,8 +105,8 @@ function [x_vals, y_vals, z_vals, s_vals] = compute_transition(pos_y, concavity,
     subplot(3,1,3);
     plot(s_vals, G_updown, 'g', 'LineWidth', 2);
     xlabel('Path Length (s) [m]');
-    ylabel('Up/Down G');
-    title('Up/Down G-Force Along Transition');
+    ylabel('Forward / Backwards G');
+    title('Forward / Backwards G-Force Along Transition');
     grid on;
     
     % Overall title for the figure

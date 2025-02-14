@@ -33,8 +33,8 @@ hold on;
 subplot(3,1,1);
 plot(s, G_banked_turn*ones(size(s)), 'r', 'LineWidth', 2);
 xlabel('Path Length (s) [m]');
-ylabel('Normal G');
-title('Normal G-Force Along Banked Turn');
+ylabel('Up / Down G');
+title('Up / Down G-Force Along Banked Turn');
 grid on;
 
 % Lateral G-Force Plot
@@ -49,8 +49,8 @@ grid on;
 subplot(3,1,3);
 plot(s, up_down_Gs, 'g', 'LineWidth', 2);
 xlabel('Path Length (s) [m]');
-ylabel('Up/Down G');
-title('Up/Down G-Force Along Banked Turn');
+ylabel('Forward / Backwards G');
+title('Forward / Backwards G-Force Along Banked Turn');
 grid on;
 
 % Adjust spacing between subplots
