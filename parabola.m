@@ -5,8 +5,8 @@ x0 = transition_start(1);
 y0 = transition_start(2);
 z0 = transition_start(3);
 v0 = sqrt(2 * g * (h_0 - z0));
-launch_angle = pi/8;
-yf = -z0;
+launch_angle = 3*pi/4;
+yf = -200;
 
 y = linspace(y0, yf, FIDELITY);
 delta_y = (yf - y0) / FIDELITY;
@@ -24,10 +24,12 @@ for i=2:FIDELITY
 end
 v = sqrt(2 * g * (h_0 - z));
 
-scatter3(x0 * ones(1, FIDELITY), y, z, 20, v, 'filled');
-xlabel("x");
-ylabel("y");
-zlabel("z");
+x = x0 * ones(1, FIDELITY);
+
+%scatter3(x, y, z, 20, Gs, 'filled');
+%xlabel("x");
+%ylabel("y");
+%zlabel("z");
 
 function G_N_parabola = calculateParabolaGs(a, b, c, x, x_0, h_0)
     G_N_parabola = ( 4 * a * (h_0 - c) + b^2 + 1 ) ./ ( ( 4 * a^2 .* (x - x_0).^2 ) + ( 4 * a * b .* (x - x_0) ) + b^2 + 1).^1.5;
