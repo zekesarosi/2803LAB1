@@ -1,4 +1,4 @@
-function [x_vals, y_vals, z_vals, s_vals] = compute_transition(pos_y, concavity, start_slope, end_slope, transition_start, L, zf, trans_fid, parameters)
+function [x_vals, y_vals, z_vals, s_vals, G_normal, G_lateral, G_updown, G_total] = compute_transition(pos_y, concavity, start_slope, end_slope, transition_start, L, zf, trans_fid, parameters)
     global parameters;
     % Extract start coordinates
     y0 = transition_start(2);
@@ -79,6 +79,8 @@ function [x_vals, y_vals, z_vals, s_vals] = compute_transition(pos_y, concavity,
     G_normal = a_n / parameters.g;
     G_lateral = a_lat / parameters.g;
     G_updown = a_updown / parameters.g;
+
+    G_total = vecnorm([G_normal; G_lateral; G_updown], 2, 1);
 
     x_vals = transition_start(1) * ones(size(y_vals));
 
