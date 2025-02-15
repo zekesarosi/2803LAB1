@@ -9,21 +9,17 @@ radius = (cart.speed^2)*(cot(bank_angle_rads))/(parameters.g); % In meters
 
 total_banked_turn_length = radius*pi;
 
-G_banked_turn = 1/cos(bank_angle_rads);
-
-
-
 fidelity = parameters.feature_fid; % amount of points to be modeled
 
-s = linspace(0,total_banked_turn_length,fidelity); % array of discrete track lengths 
+s_banked_turn = linspace(0,total_banked_turn_length,fidelity); % array of discrete track lengths 
 
-up_down_Gs = zeros(size(s));
-lateral_Gs = zeros(size(s));
+G_normal_banked_turn = 1/cos(bank_angle_rads);
+G_lateral_banked_turn = zeros(1, length(s_banked_turn));
+G_forwardback_banked_turn = zeros(1, length(s_banked_turn));
 
-[x, y, z] = banked_turn_path(s, radius, banked_turn_origin(1), banked_turn_origin(2), banked_turn_origin(3), dir);
+[x_banked_turn, y_banked_turn, z_banked_turn] = banked_turn_path(s_banked_turn, radius, banked_turn_origin(1), banked_turn_origin(2), banked_turn_origin(3), dir);
 
-%v = cart.speed.*ones(1, length(s));
-%scatter3(x, y, z, 20, G_banked_turn*ones(size(x)), 'filled'); % 20 is marker size
+% v = cart.speed.*ones(1, length(s));
 
 
 %% Create Figure with Subplots
@@ -31,15 +27,15 @@ figure(2);
 hold on;
 % Normal G-Force Plot
 subplot(3,1,1);
-plot(s, G_banked_turn*ones(size(s)), 'r', 'LineWidth', 2);
+plot(s_banked_turn, G_normal_banked_turn*ones(size(s_banked_turn)), 'r', 'LineWidth', 2);
 xlabel('Path Length (s) [m]');
-ylabel('Normal G');
-title('Normal G-Force Along Banked Turn');
+ylabel('Up / Down G');
+title('Up / Down G-Force Along Banked Turn');
 grid on;
 
 % Lateral G-Force Plot
 subplot(3,1,2);
-plot(s, lateral_Gs, 'b', 'LineWidth', 2);
+plot(s_banked_turn, G_lateral_banked_turn, 'b', 'LineWidth', 2);
 xlabel('Path Length (s) [m]');
 ylabel('Lateral G');
 title('Lateral G-Force Along Banked Turn');
@@ -47,15 +43,19 @@ grid on;
 
 % Up/Down G-Force Plot
 subplot(3,1,3);
-plot(s, up_down_Gs, 'g', 'LineWidth', 2);
+plot(s_banked_turn, G_forwardback_banked_turn, 'g', 'LineWidth', 2);
 xlabel('Path Length (s) [m]');
-ylabel('Up/Down G');
-title('Up/Down G-Force Along Banked Turn');
+ylabel('Forward / Backwards G');
+title('Forward / Backwards G-Force Along Banked Turn');
 grid on;
 
 % Adjust spacing between subplots
-sgtitle('G-Forces Along Banked Turn'); % Overall title for the figure
+fig_title = sprintf('G-Forces Along Banked Turn %i', banked_turn_count);
+sgtitle(fig_title); % Overall title for the figure
 hold off;
+
+filename = sprintf("G_Forces_Banked_Turn_%i.png", banked_turn_count);
+saveas(gcf, filename);
 
 function [x, y, z] = banked_turn_path(s, radius, x0, y0, z0, dir)
    
